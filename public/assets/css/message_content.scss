@@ -1,0 +1,258 @@
+@use "_variables";
+
+
+.content__container {
+  background: variables.$primary;
+}
+
+.content--head {
+  display: flex;
+  background: variables.$primary;
+  width: 78.6vw;
+  justify-content: space-between;
+  padding: 8px 5px;
+  border-bottom: solid 1px variables.$black;
+
+  .channel-name {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    i {
+      color: variables.$light-grey;
+    }
+
+    p {
+      color: variables.$white;
+    }
+  }
+
+  .search_form{
+    background: variables.$tertiary;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 10px;
+
+    input{
+      border-radius: 5px;
+      border: none;
+      background: variables.$tertiary;
+      color: variables.$very-light-grey;
+
+      &:focus{
+        outline: none;
+      }
+    }
+
+    button{
+      border: none;
+      background: none;
+      color: variables.$light-grey;
+
+      i{
+        cursor: pointer;
+
+        &:hover{
+          color: variables.$very-light-grey;
+        }
+      }
+    }
+  }
+}
+
+.form__add--message {
+
+  position: fixed;
+  bottom: 15px;
+
+
+  form {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    background: variables.$other-grey;
+    margin: 10px;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 63vw;
+  }
+
+  div {
+    #message_content {
+      resize: none;
+      background: variables.$other-grey;
+      border: none;
+      border-radius: 5px;
+      width: 55vw;
+      height: 50px;
+      line-height: 50px;
+      margin-right: 35px;
+      color: variables.$very-light-grey;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  button[type=submit] {
+    border: none;
+    background: variables.$other-grey;
+
+    i {
+      color: variables.$white;
+      cursor: pointer;
+    }
+  }
+
+  .parent-div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .parent-div input[type=file] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+    cursor: pointer;
+
+  }
+
+  .btn-upload {
+    background-color: variables.$very-light-grey;
+    border: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    i {
+      color: variables.$grey;
+      font-size: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.content--body {
+  background: variables.$primary;
+  height: calc(90vh - 50px);
+  overflow-y: scroll;
+  padding-top: 20px;
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: variables.$primary;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: variables.$secondary;
+    border-radius: 20px;
+    border: 3px solid variables.$light-grey;
+  }
+
+
+  .answer {
+    padding-left: 50px;
+    position: relative;
+
+
+    .message__contentParent,  {
+      color: variables.$very-light-grey;
+
+    }
+
+    .message__pseudoParent{
+      color: variables.$red;
+    }
+
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      transform: scaleX(-1);
+      color: variables.$light-grey;
+
+    }
+  }
+
+  .message {
+    position: relative;
+    padding-left: 20px;
+    margin: 10px 0;
+
+    &:hover {
+      background: variables.$light-black;
+
+      .message__icon {
+        display: flex;
+      }
+    }
+
+    .message__content {
+      color: variables.$very-light-grey;
+    }
+
+    .message__pseudo{
+      color: variables.$red;
+    }
+
+    .message__icon {
+      background: variables.$primary;
+      display: none;
+      width: min-content;
+      column-gap: 7px;
+      border-radius: 5px;
+      border: solid 1px variables.$black;
+      margin-left: 10px;
+      position: absolute;
+      top: -12px;
+      right: 20px;
+
+      .message__update, .message__reply, .message__delete {
+        text-decoration: none;
+
+        i {
+          color: variables.$very-light-grey;
+          cursor: pointer;
+        }
+      }
+
+      .message__update, .message__reply {
+        height: 100%;
+        padding: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+
+        &:hover {
+          background: variables.$light-grey;
+        }
+      }
+
+      .message__delete {
+        padding: 5px;
+
+        &:hover {
+          i {
+            color: variables.$red;
+          }
+        }
+      }
+    }
+  }
+
+  hr {
+    border: 1px solid variables.$light-grey;
+  }
+}

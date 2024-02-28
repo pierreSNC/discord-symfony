@@ -1,0 +1,62 @@
+@use 'variables';
+
+.form__category__container{
+  display: flex;
+  color: variables.$very-light-grey;
+  background: variables.$primary;
+
+  div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 20px;
+    margin: 0 8px;
+    img{
+      border-radius: 50%;
+      height: 80px;
+      width: 80px;
+      object-fit: cover;
+    }
+  }
+}
+
+.form__category__form{
+  margin: 50px 0 20px 0;
+  display: flex;
+  column-gap: 20px;
+  color: variables.$very-light-grey;
+  background: variables.$primary;
+}
+
+.form__subCategory__wrapper{
+  display: flex;
+  justify-content: center;
+  color: variables.$very-light-grey;
+
+  flex-wrap: wrap;
+  width: 50%;
+  margin: 50px auto;
+  column-gap: 20px;
+  div{
+    margin: 10px 0;
+  }
+}
+
+.form__subCategory__form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+  color: variables.$very-light-grey;
+}
+
+.return__chat{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+
+  a{
+    color: variables.$very-light-grey;
+  }
+}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="">
+        <div class="form__subCategory__wrapper">
+            {% for subCategory in subCategories %}
+                <div>
+                    <p>Name : {{ subCategory.name }}</p>
+                    <p>Catégorie associée : {{ subCategory.category.name }}</p>
+                    <a href="{{ path('app_sub_category_delete', {id: subCategory.id} ) }}">delete</a>
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form_start(form) }}
+            <div class="form__subCategory__form">
+                <div>
+                    <div>
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div style="margin: 10px 0;">
+                        {{ form_label(form.category) }}
+                        {{ form_widget(form.category) }}
+                    </div>
+                </div>
+                <button type="submit">Enregistrer</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div style="" class="return__chat">
+            <a href="{{ path('app_message') }}">Retour sur le site</a>
+        </div>
+    </div>
+{% endblock %}

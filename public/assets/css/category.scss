@@ -1,0 +1,115 @@
+@use "_variables";
+
+.category__container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: variables.$tertiary;
+  row-gap: 10px;
+  width: 4.7vw;
+  padding: .7vw;
+  min-height: 100vh;
+
+  .logo_discord{
+
+    border-bottom: solid 1px variables.$very-light-grey;
+    padding-bottom: 10px;
+
+    div{
+      height: 50px;
+      width: 50px;
+      background: variables.$light-grey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: .2s ease-in-out;
+      border-radius: 50%;
+
+      &:hover{
+        border-radius: 30%;
+        background: variables.$blue;
+      }
+
+
+      a{
+        img{
+          width: 35px;
+          height: auto;
+          margin: 0 auto;
+          border-radius: 0!important;
+        }
+      }
+    }
+  }
+
+  .category__item{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    a{
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      text-decoration: none;
+      img{
+        border-radius: 50%;
+        object-fit: cover;
+        height: 50px;
+        width: 50px;
+        transition: .2s ease-in-out;
+
+
+      }
+      &:hover{
+        img{
+          border-radius: 30%;
+        }
+        p{
+          display: block!important;
+        }
+      }
+    }
+
+  .category__add--icon{
+    background: variables.$secondary;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+      i{
+        color: variables.$light-green;
+        font-size: 35px;
+      }
+  }
+    p{
+      background: variables.$black;
+      padding: 5px;
+      color: variables.$white;
+      display: none;
+      position: absolute;
+      left: 70px;
+    }
+  }
+
+  .logout{
+    position: fixed;
+    bottom: 15px;
+
+    a{
+      text-decoration: none;
+
+      i{
+        color: variables.$very-light-grey;
+        font-size: 20px;
+        transition: .3s ease-in-out;
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}

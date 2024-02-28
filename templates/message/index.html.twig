@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Discord - Chat about web development{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="category__container">
+        <div class="category__item logo_discord">
+            <div>
+                <a href="{{ path('app_message') }}">
+                    <img src="{{ asset('assets/img/logo_discord.png') }}" alt="">
+                </a>
+            </div>
+        </div>
+        {% for c in categories %}
+            <div class="category__item">
+                <a href="{{ path('app_message_category', {'category': c.name } ) }}">
+                    <img src="{{ asset('uploads/channels/')~c.image }}" alt="">
+                    <p>{{ c.name }}</p>
+                </a>
+            </div>
+        {% endfor %}
+        {% if app.user.roles[0] is same as 'ROLE_ADMIN'%}
+        <div class="category__item">
+            <a href="{{ path('app_category') }}">
+                <div class="category__add--icon">
+                    <i class="fa-light fa-plus"></i>
+                </div>
+                <p>add</p>
+
+            </a>
+        </div>
+        {% endif %}
+        <div class="logout">
+            {% if app.user %}
+                <a class="nav-link" href="{{ path('app_logout') }}">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="wrapper" style="display: flex; flex-direction: column; justify-content: space-around; align-items: center; gap: 25px">
+        <p style="font-size: 25px">
+            Bienvenue sur Discourd ! Vous pouvez discutez sur les différents salon qui ont été créé.
+            Chaque salon est créer selon un thème particulier afin de filtrer au maximum les conversations.
+        </p>
+        <img src="https://seeklogo.com/images/D/discord-logo-B02E5FBA04-seeklogo.com.png" alt="" width="250" style="height: auto" >
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="main-container">
+        <div class="category__container">
+            <div class="category__item logo_discord">
+                <div>
+                    <a href="{{ path('app_message') }}">
+                        <img src="{{ asset('assets/img/logo_discord.png') }}" alt="">
+                    </a>
+                </div>
+            </div>
+            {% for c in categories %}
+                <div class="category__item">
+                    <a href="{{ path('app_message_category', {'category': c.name } ) }}">
+                        <img src="{{ asset('uploads/channels/')~c.image }}" alt="">
+                        <p>{{ c.name }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+            {% if app.user.roles[0] is same as 'ROLE_ADMIN'%}
+                <div class="category__item">
+                    <a href="{{ path('app_category') }}">
+                        <div class="category__add--icon">
+                            <i class="fa-light fa-plus"></i>
+                        </div>
+                        <p>add</p>
+                    </a>
+                </div>
+            {% endif %}
+            <div class="logout">
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="sub_category__wrapper">
+            <div class="server-name">
+                {{ server_name }}
+            </div>
+            <div class="sub_category__head">
+                <p>Salon textuels</p>
+{#                {{  dump(app.user.roles[0]) }}#}
+                {% if app.user.roles[0] is same as 'ROLE_ADMIN'%}
+                    <div class="sub_category__add">
+                        <a href="{{ path('app_sub_category') }}">
+                            <i class="fa-light fa-plus"></i>
+                        </a>
+                    </div>
+                {% endif %}
+
+            </div>
+            {% for subCategory in subCategoryName %}
+                <div class="sub_category__item">
+                    <a href="{{ path('app__message_sub_category', {'category': subCategory.category.name, 'subcategory': subCategory.name } ) }}">
+                        <div>
+                            <i class="fa-solid fa-hashtag"></i>
+                            <p>{{ subCategory.name }}</p>
+
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="content__container">
+
+            <div class="content--head">
+                <div class="channel-name">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <p>{{ channel_name }}</p>
+                </div>
+                <div class="search_form">
+                    {{ form_start(searchForm) }}
+                        {{ form_widget(searchForm.q) }}
+
+                    <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    {{ form_end(searchForm) }}
+                </div>
+            </div>
+            <div class="content--body">
+                {% for message in messages %}
+                    {% if message.pseudoParent != null %}
+                        <div>
+                            <div style="display: flex; gap: 10px;" class="answer">
+                                <i class="fa-solid fa-arrow-turn-down"></i>
+                                <p class="
+                                      message__pseudoParent
+{#                                      {% if app.user.pseudo is same as message.pseudo %}#}
+{#                                        message__pseudoParent--admin#}
+{#                                      {% endif %}#}
+                                    ">{{ message.pseudoParent }}</p>
+                                <p class="message__contentParent">{{ message.contentParent }}</p>
+
+
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <div class="message">
+                            <p class="
+                                    message__pseudo
+{#                                    {% if app.user.pseudo is same as message.pseudo %}#}
+{#                                        message__pseudo--admin#}
+{#                                      {% endif %}#}
+                                ">{{ message.pseudo }}</p>
+                            <p class="message__content">{{ message.content }}</p>
+
+                            {% set split = message.file|split('.') %}
+                            {% if split[1] is defined %}
+                                {% set extension = split[1] %}
+                            {% else %}
+                                {% set extension = '' %}
+                            {% endif %}
+                            {% if message.file is not null %}
+                                {% if extension is same as 'jpg' or extension is same as 'png' or extension is same as 'jpeg' %}
+                                    <a href="{{ asset('uploads/files/')~message.file }}" target="_blank">
+                                        <img src="{{ asset('uploads/files/')~message.file }}" alt="test" width="500px" height="auto">
+                                    </a>
+                                {% endif %}
+                                {% if extension is same as 'pdf' %}
+                                    <a href="{{ asset('uploads/files/' ~ message.file) }}" target="_blank">Download file</a>
+                                {% endif %}
+                                {% if extension is same as 'mp4' %}
+                                    <video controls width="250">
+                                        <source src="{{ asset('uploads/files/' ~ message.file) }}" type="video/mp4">
+                                    </video>
+                                {% endif %}
+                            {% endif %}
+                            <div class="message__icon">
+                                {% if app.user.pseudo is same as message.pseudo %}
+                                    <a href="{{ path('app__message_sub_category', {id: message.id, 'category': message.category, 'subcategory' :  message.subCategory}) }}" class="message__update">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                {% endif %}
+                                <a href="{{ path('app_response_message_category', {response_id: message.id, 'category': message.category, 'subcategory' :  message.subCategory}) }}" class="message__reply">
+                                    <i class="fa-solid fa-reply"></i>
+                                </a>
+                                {% if app.user.pseudo is same as message.pseudo %}
+                                <a href="{{ path('app_message_delete', {id: message.id, category: message.category, 'subcategory' :  message.subCategory } ) }}" class="message__delete">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                                {% elseif app.user.roles[0] is same as 'ROLE_ADMIN' %}
+                                    <a href="{{ path('app_message_delete', {id: message.id, category: message.category, 'subcategory' :  message.subCategory } ) }}" class="message__delete">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+
+            </div>
+            <div class="form__add--message">
+                {{ form_start(form, {'attr': {'id': 'add-message'}}) }}
+                <div style="display: none;">
+                    {{ form_label(form.pseudo) }}
+                    {{ form_widget(form.pseudo) }}
+                </div>
+                <div class="parent-div">
+                    <button class="btn-upload">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    {{ form_widget(form.file) }}
+                </div>
+                <div>
+                    {{ form_widget(form.content) }}
+                </div>
+                <div style="display: none;">
+                    {{ form_label(form.subCategory) }}
+                    {{ form_widget(form.subCategory) }}
+                </div>
+                <div style="display: none;">
+                    {{ form_label(form.category) }}
+                    {{ form_widget(form.category) }}
+                </div>
+
+
+                <button type="submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}

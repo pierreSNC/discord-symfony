@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="register__container">
+        <h2>Register</h2>
+        <div class="register__wrapper">
+            {{ form_start(registrationForm) }}
+            <div style="color: #af0000;">
+                {{ form_errors(registrationForm.email) }}
+                {{ form_errors(registrationForm.pseudo) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+            <div class="register__item1">
+                {{ form_widget(registrationForm.email) }}
+                {{ form_widget(registrationForm.pseudo) }}
+            </div>
+            <div class="password">
+                {{ form_widget(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+            </div>
+            <div class="agreeTerms">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms) }}
+            </div>
+            <button type="submit" class="btn">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+        <div class="link__to__login">
+            Already registered ? <a href="{{ path('app_login') }}">login</a>
+        </div>
+    </div>
+{% endblock %}

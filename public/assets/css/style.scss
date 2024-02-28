@@ -1,0 +1,27 @@
+@use 'category';
+@use 'form_message';
+@use 'sub_category';
+@use 'message_content';
+@use 'messages';
+@use "register";
+@use "login";
+@use "variables";
+@use "form_category";
+
+*, ::after, ::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: "Gill Sans MT", sans-serif;
+  background: variables.$primary;
+
+}
+
+.main-container{
+  display: flex;
+  background: variables.$primary;
+
+}

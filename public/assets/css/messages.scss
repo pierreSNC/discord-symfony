@@ -1,0 +1,19 @@
+@use "_variables";
+
+.container{
+  display: flex;
+  background: variables.$primary;
+
+  .wrapper{
+    width: 95.6vw;
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+
+    p{
+      color: variables.$very-light-grey;
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
